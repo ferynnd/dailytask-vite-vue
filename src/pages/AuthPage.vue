@@ -1,13 +1,9 @@
-<template>
-  <router-view />
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
-import { login as apiLogin, register as apiRegister } from './api.js'
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
+import { login as apiLogin, register as apiRegister } from '../api.js'
 
 const showLogin = ref(true)
 const message = ref('')
@@ -55,3 +51,10 @@ async function handleRegister(data) {
 }
 </script>
 
+<template>
+  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div v-if="message" class="mb-4 px-4 py-2 rounded bg-blue-100 text-blue-800">{{ message }}</div>
+    <Login v-if="showLogin" @login="handleLogin" @show-register="showLogin = false" />
+    <Register v-else @register="handleRegister" @show-login="showLogin = true" />
+  </div>
+</template>

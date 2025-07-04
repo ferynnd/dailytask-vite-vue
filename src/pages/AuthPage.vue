@@ -39,8 +39,8 @@ async function handleRegister(data) {
   message.value = ''
   try {
     const res = await apiRegister(data)
-    if (res.success || res.token) {
-      message.value = 'Register berhasil! Silakan login.'
+    if (res.name) {
+      message.value = `Register User ${res.name} berhasil! Silakan login.`
       showLogin.value = true
     } else {
       message.value = res.message || 'Register gagal.'
